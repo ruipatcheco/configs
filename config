@@ -209,24 +209,32 @@ bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 
 
 # lock screen
-#bindsym $mod+shift+x exec i3lock -p win -i ~/Pictures/DoMore.png -u -c 2f343f
+bindsym $mod+shift+x exec i3lock -p win -i ~/Pictures/DoMore.png -u -c 2f343f
 #bindsym $mod+shift+x exec i3lock -p win -c 2f343f
 
 # lock screen
-#bindsym $mod+shift+z exec sleep 1 && xset -display :0.0 dpms force off 
+bindsym $mod+shift+z exec sleep 1 && xset -display :0.0 dpms force off 
 
 
 # redshift
-bindsym $mod+shift+g exec redshift -O 2000
-bindsym $mod+shift+h exec redshift -x
+#bindsym $mod+shift+g exec redshift -O 2000
+#bindsym $mod+shift+h exec redshift -x
 
 # symbinds
-bindsym $mod+ctrl+c exec google-chrome-stable
-bindsym $mod+ctrl+y exec thunar 
-bindsym $mod+ctrl+t exec thunar /media/basiliu/SamsungSD
+bindsym $mod+ctrl+c exec iridium-browser
+bindsym $mod+ctrl+t exec thunar 
+bindsym $mod+ctrl+m exec thunar /media/ehdd/MEGA
+bindsym $mod+ctrl+d exec thunar /media/ehdd/Downloads
+bindsym $mod+space exec xfce4-popup-whiskermenu
+bindsym $mod+shift+o exec /home/basiliu/.screenlayout/output_docked.sh
+bindsym $mod+ctrl+p exec /home/basiliu/scripts/mupdf_openlatest.sh
+
+
 
 bindsym $mod+ctrl+s exec spotify
-bindsym $mod+shift+w exec feh --bg-scale ~/Pictures/wal.jpg
+bindsym $mod+shift+w exec feh --bg-scale ~/Pictures/a.jpg
+
+
 
 #shutdown prompt
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'Shutdown now?' -b 'yes' 'shutdown now' "
@@ -234,6 +242,12 @@ bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'Shutdown now?' -b 'yes' 'shu
 
 #Start Apps Shortcuts
 exec --no-startup-id redshift -O 2000
-exec --no-startup-id feh --bg-scale ~/Pictures/wal.jpg
+exec --no-startup-id feh --bg-scale ~/Pictures/a.jpg
+exec --no-startup-id xmodmap -e "keycode 135 = Super_L"  
+exec --no-startup-id xinput set-prop "TPPS/2 IBM TrackPoint" "Device Accel Constant Deceleration" 0.3 
 
 new_window none
+workspace_layout tabbed
+
+
+# echo level 4 | sudo tee /proc/acpi/ibm/fan
