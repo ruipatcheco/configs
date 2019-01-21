@@ -1,0 +1,28 @@
+#!/bin/bash
+echo "Usage: subliminalscript \`pwd\`"
+
+workingdir=$* 
+echo $workingdir
+cd "$workingdir" #https://stackoverflow.com/questions/589149/bash-script-to-cd-to-directory-with-spaces-in-pathname
+#shift #consume argument
+
+task(){
+   echo "Downloading subs for $1";
+   subliminal download -l pt "$workingdir/$1"
+   echo "$1 done";
+}
+
+
+
+shopt -s nullglob #If there are no pdf files in current directory it will expand to *.pdf (i.e. f will be set to *.pdf”). To avoid this problem add the following statement before the for loop:
+for f in *.{mkv,avi,mp4}; do
+	read -r -p "Download subs for $f? [y/N] " response
+	if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
+	then
+	    task "$f" &
+	else
+	    continue
+	fi
+done
+
+
