@@ -7,13 +7,14 @@
 
 # i3 config file (v4)
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+
+font pango:DejaVu Sans Mono 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -30,19 +31,13 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
-
-# For use with xfce4 whisker popup menu in Mint XFCE:
-# bindsym $mod+Shift+d exec dmenu_run
-# bindsym $mod+d exec --no-startup-id xfce4-popup-whiskermenu
-
-
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -52,7 +47,7 @@ bindsym $mod+d exec dmenu_run
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+ccedilla focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -64,7 +59,7 @@ bindsym $mod+Right focus right
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+ccedilla move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -77,6 +72,10 @@ bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
+
+#fibbonaci
+default_orientation vertical #start in opposite orientation from your monitor
+for_window [class=".*"] split toggle #toggles split at each new window
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -98,49 +97,29 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-#######Vars Workspace
-set $workspace1 ""
-set $workspace2 ""
-set $workspace3 ""
-set $workspace4 ""
-set $workspace5 ""
-set $workspace6 ""
-
-
 # switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
-
-
-# --- Assignment to Workspace -- #
-assign [class="(?i)google-chrome"] $workspace1
-assign [class="(?i)spotify"] $workspace6
-assign [class="(?i)skypeforlinuxT"] $workspace5
-assign [class="(?i)discord"] $workspace5
-#assign [class="(?i)remmina"] $workspace3
-assign [class="(?i)subl"] $workspace4
-
-
 
 # --- Move workspaces -- #
 bindsym $mod+shift+Control+Right move workspace to output right
@@ -149,13 +128,21 @@ bindsym $mod+shift+Control+Down move workspace to output down
 bindsym $mod+shift+Control+Up move workspace to output up
 
 
+# --- Assignment to Workspace -- #
+assign [class="(?i)google-chrome"] workspace1
+assign [class="(?i)spotify"] workspace6
+assign [class="(?i)skypeforlinuxT"] workspace5
+assign [class="(?i)discord"] workspace5
+#assign [class="(?i)remmina"] $workspace3
+assign [class="(?i)subl"] workspace4
+
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-#-old-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exec xfce4-session-logout
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -168,7 +155,7 @@ mode "resize" {
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym ccedilla resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -182,6 +169,12 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command i3blocks
+}
 
 
 set $bg-color            #2f343f
@@ -197,9 +190,39 @@ client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-co
 client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $bg-color   $bg-color 
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $bg-color   $bg-color
 
+set $Locker i3lock && sleep 1
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Delete mode "$mode_system"
+
+set $mode_display System (l) laptop, (e) docked
+mode "$mode_display" {
+    bindsym l exec --no-startup-id xrandr --output VGA-1 --off --output LVDS-1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output DP-1 --off && feh --bg-scale ~/images/a.jpg
+    bindsym e exec --no-startup-id xrandr --output VGA-1 --off --output LVDS-1 --primary --mode 1366x768 --pos 480x1080 --rotate normal --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --mode 2560x1080 --pos 0x0 --rotate normal --output DP-1 --off && feh --bg-scale ~/images/a.jpg
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+F7 mode "$mode_display"
+
+
+#Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q -D pulse sset Master 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q -D pulse sset Master 5%-
+bindsym XF86AudioMute exec --no-startup-id amixer -q -D pulse sset Master toggle
+
 
 # Spotify related key bindings
 bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
@@ -208,11 +231,7 @@ bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 
 
-# lock screen
-bindsym $mod+shift+x exec i3lock -p win -i ~/Pictures/DoMore.png -u -c 2f343f
-#bindsym $mod+shift+x exec i3lock -p win -c 2f343f
-
-# lock screen
+# blank screen
 bindsym $mod+shift+z exec sleep 1 && xset -display :0.0 dpms force off 
 
 
@@ -221,30 +240,23 @@ bindsym $mod+shift+z exec sleep 1 && xset -display :0.0 dpms force off
 #bindsym $mod+shift+h exec redshift -x
 
 # symbinds
-bindsym $mod+ctrl+c exec iridium-browser
-bindsym $mod+ctrl+t exec thunar 
-bindsym $mod+ctrl+m exec thunar /media/ehdd/MEGA
-bindsym $mod+ctrl+d exec thunar /media/ehdd/Downloads
-bindsym $mod+space exec xfce4-popup-whiskermenu
-bindsym $mod+shift+o exec /home/basiliu/.screenlayout/output_docked.sh
-bindsym $mod+ctrl+p exec /home/basiliu/scripts/mupdf_openlatest.sh
-
-
-
+bindsym $mod+ctrl+c exec chromium-browser
+bindsym $mod+ctrl+p exec /home/basil/scripts/mupdf_openlatest.sh
 bindsym $mod+ctrl+s exec spotify
-bindsym $mod+shift+w exec feh --bg-scale ~/Pictures/a.jpg
+bindsym $mod+shift+w exec feh --bg-scale ~/images/a.jpg
 
-
-
-#shutdown prompt
-bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'Shutdown now?' -b 'yes' 'shutdown now' "
 
 
 #Start Apps Shortcuts
-exec --no-startup-id redshift -O 2000
-exec --no-startup-id feh --bg-scale ~/Pictures/a.jpg
-exec --no-startup-id xmodmap -e "keycode 135 = Super_L"  
-exec --no-startup-id xinput set-prop "TPPS/2 IBM TrackPoint" "Device Accel Constant Deceleration" 0.3 
+
+set $exe exec --no-startup-id
+
+$exe redshift -O 2000
+$exe feh --bg-scale ~/images/a.jpg
+$exe xmodmap -e "keycode 135 = Super_L"  
+#$exe xinput set-prop "TPPS/2 IBM TrackPoint" "Device Accel Constant Deceleration" 0.3 
+$exe nm-applet
+
 
 new_window none
 workspace_layout tabbed
