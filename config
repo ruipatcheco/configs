@@ -74,8 +74,8 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 #fibbonaci
-default_orientation vertical #start in opposite orientation from your monitor
-for_window [class=".*"] split toggle #toggles split at each new window
+#default_orientation vertical #start in opposite orientation from your monitor
+#for_window [class=".*"] split toggle #toggles split at each new window
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -89,7 +89,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -173,8 +173,12 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+		mode hide
+    	hidden_state hide
+    	modifier none
         status_command i3blocks
 }
+
 
 
 set $bg-color            #2f343f
@@ -191,12 +195,11 @@ client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-co
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $bg-color   $bg-color
 
 set $Locker i3lock && sleep 1
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
@@ -241,9 +244,10 @@ bindsym $mod+shift+z exec sleep 1 && xset -display :0.0 dpms force off
 
 # symbinds
 bindsym $mod+ctrl+c exec chromium-browser
-bindsym $mod+ctrl+p exec /home/basil/scripts/mupdf_openlatest.sh
+bindsym $mod+ctrl+p exec /home/basil/Scripts/mupdf_openlatest.sh
 bindsym $mod+ctrl+s exec spotify
-bindsym $mod+shift+w exec feh --bg-scale ~/images/a.jpg
+bindsym $mod+shift+w exec feh --bg-scale ~/Pictures/a.jpg
+bindsym $mod+space bar hidden_state toggle
 
 
 
@@ -252,9 +256,10 @@ bindsym $mod+shift+w exec feh --bg-scale ~/images/a.jpg
 set $exe exec --no-startup-id
 
 $exe redshift -O 2000
-$exe feh --bg-scale ~/images/a.jpg
+$exe feh --bg-scale ~/Pictures/a.jpg
 $exe xmodmap -e "keycode 135 = Super_L"  
 #$exe xinput set-prop "TPPS/2 IBM TrackPoint" "Device Accel Constant Deceleration" 0.3 
+$exe blueman-applet
 $exe nm-applet
 
 
