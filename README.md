@@ -13,3 +13,10 @@ temperature2
 #!/bin/sh
 
 sensors | awk '/temp1/ {print $2}' | cut -c 2,3 | awk '{print $0"°C"}'
+
+
+fan
+
+#!/bin/sh
+
+sensors | awk '/fan/ {print $2}' 
